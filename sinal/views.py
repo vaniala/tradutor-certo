@@ -19,17 +19,14 @@ def editar(request, sinal_id):
     sinal = get_object_or_404(Sinal, id=sinal_id)
 
     if request.method == 'POST':
-        print 'oi'
         form = SinalForm(request.POST, instance=sinal)
 
         if form.is_valid():
-            print 'oi9'
             sinal = form.save(commit=False)
             sinal.save()
             return redirect('index')
 
     elif request.method == 'GET':
-         print 'o2'
          form = SinalForm(instance=sinal)
          context = {'sinal': sinal,'form': form}
          return HttpResponse(render(request, 'editar.html', context))
@@ -71,9 +68,9 @@ def lista_sinais(request):
 
 def particionar(bitmask):
     i, l = 0, []
-    while bitmask[i:i + 4]:
-        l.append(bitmask[i:i + 4])
-        i += 4
+    while bitmask[i:i + 6]:
+        l.append(bitmask[i:i + 6])
+        i += 6
     return l
 
 
